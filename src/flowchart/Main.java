@@ -135,7 +135,7 @@ public class Main extends Application {
 			}
 		});
 	}
-	
+	//Random comment
 	/** Initierar en meny
 	 * 
 	 * @return Meny att visa i GUI
