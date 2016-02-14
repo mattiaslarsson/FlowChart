@@ -141,7 +141,7 @@ public class Main extends Application {
 	 * @return Meny att visa i GUI
 	 */
 	public MenuBar initMenu() {
-		System.out.println("hejsan");
+		System.out.println("tjenare");
 		MenuBar menuBar = new MenuBar();
 		
 		Menu mnuFile = new Menu("File");
