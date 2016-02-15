@@ -213,18 +213,11 @@ public class Model {
 	public void deleteObject(ObservableList<Form> formsList, ObservableList<Path> arrowList) {
 		// Kollar i vilken lista objektet som skall raderas finns i
 		if (arrowList.contains(selObject)) {
-			// Lägger till en dummy
-			arrowList.add(null); 
-			// Raderar valt objekt
 			arrowList.remove(selObject); 
-			// Tar bort dummyn
-			arrowList.remove(arrowList.size()-1);
 			// Nollställer valt objekt
 			selObject = null; 
 		} else if (formsList.contains(selObject)) {
-			formsList.add(null);
 			formsList.remove(selObject);
-			formsList.remove(formsList.size()-1);
 			selObject=null;
 		}
 	}

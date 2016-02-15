@@ -70,18 +70,31 @@ public class Main extends Application {
 		// som innehåller former och pilar
 		arrowList.addListener(new ListChangeListener<Path>() {
 			@Override
-			public void onChanged(javafx.collections.ListChangeListener.Change<? extends Path> c) {
+			public void onChanged(Change<? extends Path> c) {
 				// När listan ändras, uppdatera vyn
 				// och lägg till lyssnare på nya pilar
-				gui.updateView(formsList, arrowList);
+				c.next();
+				if (c.wasAdded()) {
+					gui.addObject(c.getAddedSubList());
+					c.getAddedSubList().forEach(con -> {
+						con.toBack();
+					});
+				} else if (c.wasRemoved()) {
+					gui.removeObject(c.getRemoved());
+				}
+				//gui.updateView(formsList, arrowList);
 				model.setArrowListeners(arrowList, formsList);
 			}
 		});
 		
 		formsList.addListener(new ListChangeListener<Form>() {
 			@Override
-			public void onChanged(javafx.collections.ListChangeListener.Change<? extends Form> c) {
-				gui.updateView(formsList, arrowList);
+			public void onChanged(Change<? extends Form> c) {
+				c.next();
+				if (c.wasRemoved()) {
+					gui.removeObject(c.getRemoved());
+				} else {
+					gui.addObject(c.getAddedSubList());
 				formsList.forEach(node -> {
 					try {
 						// Varje form i listan skall ha en muslyssnare
@@ -132,6 +145,7 @@ public class Main extends Application {
 						});
 					} catch (Exception e) {}
 				});
+			}
 			}
 		});
 	}

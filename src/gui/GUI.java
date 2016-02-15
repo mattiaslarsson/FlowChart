@@ -1,9 +1,9 @@
 package gui;
 
-import javafx.collections.ObservableList;
+import java.util.List;
+
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -19,11 +19,9 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Path;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import shapes.Form;
 
 /** Innehåller metoder för att visa och ta bort objekt från skärmen
  * 
@@ -73,31 +71,11 @@ public class GUI {
 		root.setTop(menuBar);
 	}
 	
-	/** Uppdaterar arbetsytan när en ny form läggs till
-	 * 
-	 * @param ObservableList<Node> formsList
-	 */
-	public void updateView(ObservableList<Form> formsList, ObservableList<Path> arrowList) {
-		try {
-			centerPane.getChildren().removeAll(formsList);
-			centerPane.getChildren().removeAll(arrowList);
-			centerPane.getChildren().addAll(formsList);
-			centerPane.getChildren().addAll(arrowList);
-			
-			// Lägger alla pilar bakom de övriga objekten
-			arrowList.forEach(arrow -> {
-				arrow.toBack();
-			});
-			
-		} catch (Exception e) {}
-	}
-	
-	
 	/** Sätter en tangentbordslyssnare till scenen
 	 * 
 	 * @param EventHandler<KeyEvent> eventHandler
 	 */
-	public void setKeyboardListener(EventHandler eventHandler) {
+	public void setKeyboardListener(EventHandler<KeyEvent> eventHandler) {
 		scene.addEventHandler(KeyEvent.KEY_PRESSED, eventHandler);
 	}
 
@@ -130,8 +108,8 @@ public class GUI {
 		// Knapp för att kopiera färger
 		Button copyColors = new Button("Copy colorset");
 		copyColors.setOnAction(e -> {
-			cpBgColor = (Color) bgCp.getValue();
-			cpFgColor = (Color) fgCp.getValue();
+			cpBgColor = bgCp.getValue();
+			cpFgColor = fgCp.getValue();
 		});
 		
 		// Knapp för att klistra in färger
@@ -222,6 +200,23 @@ public class GUI {
 				+ "Arrowheads");
 		aboutAlert.showAndWait();
 		
+	}
+
+	
+	/** Tar bort ett objekt från arbetsytan
+	 * 
+	 * @param List removed
+	 */
+	public void removeObject(List<?> removed) {
+		centerPane.getChildren().removeAll(removed);
+	}
+
+	/** Lägger till ett objekt på arbetsytan
+	 * 
+	 * @param List addedSubList
+	 */
+	public void addObject(List addedSubList) {
+		centerPane.getChildren().addAll(addedSubList);
 	}
 
 
