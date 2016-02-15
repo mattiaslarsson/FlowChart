@@ -190,6 +190,8 @@ public class GUI {
 			helpHeader = "How to change color of a shape";
 			helpContent = "Double-click on a shape.\n";
 			helpContent += "Select background color and text color.\n";
+			helpContent += "You can copy this set of colors and paste it to another shape ";
+			helpContent += "simply by clicking \'Copy Colorset\' and 'Paste Colorset' respectively\n";
 			helpContent += "Press the button \'Close this panel\' to close the color picker.";
 		}
 		helpDialog.setTitle(helpTitle);
