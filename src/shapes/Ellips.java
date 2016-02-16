@@ -41,7 +41,6 @@ public class Ellips extends Form  {
 		ellipse.setRadiusX((textLayer.getBoundsInLocal().getWidth()>50 ? textLayer.getBoundsInLocal().getWidth() : 50));
 		ellipse.setRadiusY(textLayer.getBoundsInLocal().getHeight());
 		
-		
 		setTranslateX(x);
 		setTranslateY(y);
 		textLayer.setFill(textColor);
