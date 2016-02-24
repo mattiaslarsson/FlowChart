@@ -82,7 +82,6 @@ public class Main extends Application {
 				} else if (c.wasRemoved()) {
 					gui.removeObject(c.getRemoved());
 				}
-				//gui.updateView(formsList, arrowList);
 				model.setArrowListeners(arrowList, formsList);
 			}
 		});
