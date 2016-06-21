@@ -11,19 +11,21 @@ import javafx.scene.text.Text;
  *
  */
 public abstract class Form extends StackPane {
-	
+	private double dX, dY;
 	
 	public Form() {
 	// Drag'n'drop lyssnare
-		this.setOnMouseDragged(e -> {
-			double newX = this.getTranslateX()+e.getX();
-			double newY = this.getTranslateY()+e.getY();
-			this.setTranslateX(newX);
-			this.setTranslateY(newY);
+		this.setOnMousePressed(press -> {
+			dX = this.getTranslateX() - press.getSceneX();
+			dY = this.getTranslateY() - press.getSceneY();
+		})
+		this.setOnMouseDragged(drag -> {
+			this.setTranslateX(drag.getSceneX() + dX);
+			this.setTranslateY(drag.getSceneY() + dY);
 		});
 	}
 	
-	/** Skapar ett textlager som läggs ovanpå grundformen
+	/** Skapar ett textlager som lï¿½ggs ovanpï¿½ grundformen
 	 * 
 	 * @param String text
 	 * @return Text
